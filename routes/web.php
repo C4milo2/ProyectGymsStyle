@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TablaclaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,27 +22,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/home', [App\Http\Controllers\TablaclaseController::class, 'index'])->name('home');
+
+Route::post('/home', [TablaclaseController::class, 'store']);
+
 Route::get('/compras', function () {
     return view('components.compras');
 });
 
-Route::get('/Section', function () {
-    return view('components.Section');
-});
+Route::delete('Eliminar-clase/{id}',[TablaclaseController::class, 'destroy']);
 
-
-
-
-
-
-
-Route::get('/Mañana', function () {
-    return view('components/Horarios/Maandtar.Mañana');
-});
-
-Route::get('/Tarde', function () {
-    return view('components/Horarios/Maandtar.Tarde');
-});
 
 Route::get('/Perfil', function () {
     return view('components/Perfil');

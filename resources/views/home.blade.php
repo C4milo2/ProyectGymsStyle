@@ -32,29 +32,89 @@
     </div> -->
     <br>
     <br>
+    <!-- <div class="container-fluid">
     <h1 id="Titulo"> <img id="diseño1" src="{{URL::asset('/img/Titulo.png')}}" width="500rem"  alt=""></h1>
-    <h3 id="Subtitulo">Todas tus clases se guardaran aqui!!</h3>
+    </div> -->
+    <h3 id="Subtitulo">Todas tus clases se guardaran aqui!! GYM Style</h3>
     <br>
     <br>
-    <table class="table table-dark table-striped">
-<thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Tus Clases Son:</th>
-    </tr>
-</thead>
-<tbody>
-    <tr id="Tabla">
-        <th scope="row">Mañana</th>
-        <td><a >(aqui se tiene que apartar las clases)</a></td>
-        
-    </tr>
-    <tr id="Tabla">
-        <th scope="row">Tarde</th>
-        <td><a >(aqui se tiene que apartar las clases)</a></td>
-    </tr>
- 
-</tbody>
-</table>
+    <div class="col-12">
+        <div class="box-header">
+            <!--crear modal-->
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#RClases">
+                Registrar Clase
+            </button>
+        </div>
+            <<table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Hora</th>        
+                    <th>Clase</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($Tablaclase as $tbclase)
+                    <tr>
+                        <td>{{ $tbclase->id }}</td>
+                        <td>{{ $tbclase->hora }}</td>     
+                        <td>{{ $tbclase->clase }}</td>
+                        <form method="post" action="{{url('Eliminar-clase/'.$tbclase->id)}}">
+                        @csrf
+                        @method ('delete')
+                        <td><button class="btn btn-danger"> Borrar </button>
+                        </td>
+                    </form>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    </section>
+    </div>
+    
+
+            
+    <!-- Modal -->
+    <div class="modal fade" id="RClases" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title " id="staticBackdropLabel">Registrar Clase</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post">
+                    @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <h2>Hora</h2>
+                        <select class="form-control input-lg" name="hora" require="">
+                            <option value=""> Seleccionar...</option>
+                            <option value="8:00">8:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="16:00">16:00</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h2>Clases</h2>
+                        <select class="form-control input-lg" name="clase" require="">
+                            <option value=""> Seleccionar...</option>
+                            <option value="Trx">Trx</option>
+                            <option value="Boxeo">Boxeo</option>
+                            <option value="Yoga">Yoga</option>
+                            <option value="Entrenamiento basico">Entrenamiento basico</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection
